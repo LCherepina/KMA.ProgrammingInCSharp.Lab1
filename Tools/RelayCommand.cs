@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace KMA.ProgrammingInCSharp.Lab1
+namespace KMA.ProgrammingInCSharp.Lab1.Tools
 {
     class RelayCommand<T> : ICommand
     {

@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using KMA.ProgrammingInCSharp.Lab1.Annotations;
+using KMA.ProgrammingInCSharp.Lab1.Managers;
+using KMA.ProgrammingInCSharp.Lab1.Tools;
 
-namespace KMA.ProgrammingInCSharp.Lab1
+namespace KMA.ProgrammingInCSharp.Lab1.ViewModels
 {
     class MainViewViewModel : INotifyPropertyChanged
     {
@@ -182,6 +184,7 @@ namespace KMA.ProgrammingInCSharp.Lab1
 
         private async void Calculate(KeyEventArgs args)
         {
+            LoaderManager.Instance.ShowLoader();
             await Task.Run(() =>
             {
                 CalculateAge();
@@ -193,6 +196,7 @@ namespace KMA.ProgrammingInCSharp.Lab1
 
                 return true;
             });
+            LoaderManager.Instance.HideLoader();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

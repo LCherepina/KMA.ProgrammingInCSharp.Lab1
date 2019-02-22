@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="HOROSCOPE" MinHeight="350" MinWidth="400" Height="350" Width="400">
+        Title="HOROSCOPE" MaxHeight="350" MaxWidth="400"  MinHeight="350" MinWidth="400"  Height="350" Width="400">
     <Grid>
-        <ContentControl Name="ContentControl" IsEnabled="{Binding Path=IsEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></ContentControl>
-       
-        </Grid>
+        <ContentControl Name="_contentControl" IsEnabled="{Binding Path=IsControlEnabled, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"></ContentControl>
+        <fa:ImageAwesome Name="ImageAwesome"  Icon="Refresh" Width="50" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center" Spin="True" Visibility="{Binding Path=LoaderVisibility, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+    </Grid>
 </Window>
