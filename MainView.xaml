@@ -1,0 +1,35 @@
+﻿<Page x:Class="KMA.ProgrammingInCSharp.Lab1.MainView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+      MinHeight="350" MinWidth="400" FontSize="15">
+
+    <Grid Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"></ColumnDefinition>
+            <ColumnDefinition Width="180"></ColumnDefinition>
+
+        </Grid.ColumnDefinitions>
+        <Label Name="AskBd" Grid.Row="0" VerticalAlignment="Center"  Content="Enter your birthday date: " ></Label>
+        <DatePicker Name="DatePicker" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" DisplayDate="{x:Static sys:DateTime.Now}"  SelectedDate="{Binding Date , UpdateSourceTrigger=PropertyChanged, Delay=5}"></DatePicker>
+        <Label Name="Age" Grid.Row="1" Grid.Column="0"  VerticalAlignment="Center"  Content="Your age is: " ></Label>
+        <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Age, Mode=OneWay}"></TextBlock>
+        <Label Name="WesternAstrology" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Content="Western Astrology: " ></Label>
+        <Label Name="ChineseAstrology" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Content="Chinese Astrology: " ></Label>
+        <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding WAstrology, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"></TextBlock>
+        <TextBlock Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding ChAstrology, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"></TextBlock>
+        <Button Name="Calculate" Grid.Row="4" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.ColumnSpan="2" Command="{Binding CalculateCommand}">Calculate</Button>
+
+    </Grid>
+</Page>
