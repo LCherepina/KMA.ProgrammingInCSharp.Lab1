@@ -14,7 +14,8 @@ namespace KMA.ProgrammingInCSharp.Lab1.ViewModels
     {
         #region Fields
 
-        private Horoscope _horoscope;
+        private DateTime _dateTime = DateTime.Now;
+
         private readonly string[] _westSigns = { "Capricorn", "Aquarius", "Pisces", "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius" };
         private readonly string[] _chineseSigns = { "Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Goat", "Monkey", "Rooster", "Dog", "Pig" };
 
@@ -26,92 +27,57 @@ namespace KMA.ProgrammingInCSharp.Lab1.ViewModels
 
         #region Properties
 
-        public DateTime Date
-        {
-            get { return _horoscope.Date; }
-            set
-            {
-                if (value < DateTime.Today.AddYears(-135) || value > DateTime.Now)
-                {
+        public DateTime Date {
+            get { return _dateTime; }
 
-                    MessageBox.Show("Invalid date birth!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-                    _horoscope.Date = DateTime.Now;
-                    CalculateWestSign();
-                    CalculateChineseSign();
-                    OnPropertyChanged(nameof(Date));
-                    OnPropertyChanged(nameof(Age));
-                    OnPropertyChanged(nameof(WAstrology));
-                    OnPropertyChanged(nameof(ChAstrology));
-                }
-                else
-                {
-                    _horoscope.Date = value;
+            set { _dateTime = value; }
 
-                }
-            }
         }
 
-        public int Age
-        {
-            get { return _horoscope.Age; }
-            set { _horoscope.Age = value; }
-        }
+        public string Age { get; set; }
 
-        public string WAstrology
-        {
-            get {return _horoscope.WAstrology;}
-            set { _horoscope.WAstrology = value; }
-        }
+        public string WAstrology { get; set; }
 
-        public string ChAstrology
-        {
-            get { return _horoscope.ChAstrology;}
-            set { _horoscope.ChAstrology = value; }
-        }
-
-            
-
-//       
-//    }
+        public string ChAstrology { get; set; }
 
 
-
-
-#region Commands
-public ICommand CalculateCommand
+        #region Commands
+        public ICommand CalculateCommand
         {
             get
             {
                 return _calculateCommand ?? (_calculateCommand = new RelayCommand<KeyEventArgs>(Calculate));
-
             }
         }
         #endregion
 
         #endregion
-
-        public MainViewViewModel()
-        {
-            _horoscope = new Horoscope();
-        }
 
 
         private void CalculateAge()
         {
-            if (Date.Day == DateTime.Now.Day && Date.Month == DateTime.Now.Month && (_horoscope.Age < 135 || _horoscope.Age >= 0))
+            if (Date.Day == DateTime.Now.Day && Date.Month == DateTime.Now.Month && (Date >= DateTime.Today.AddYears(-135) || Date >= DateTime.Now) )
             {
                 MessageBox.Show("!!!!!!!!Happy Birthday!!!!!!!!!", "Greeting!", MessageBoxButton.OK);
             }
+            if (Date < DateTime.Today.AddYears(-135) || Date > DateTime.Now)
+            {
+
+                MessageBox.Show("Invalid date birth!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                Date = DateTime.Now;
+            }
+
+            
             if (Date.Month > DateTime.Now.Month ||
                 (Date.Month == DateTime.Now.Month && Date.Day > DateTime.Now.Day))
             {
-                _horoscope.Age = DateTime.Now.Year - _horoscope.Date.Year - 1;
+                Age = (DateTime.Now.Year - Date.Year - 1).ToString();
 
             }
             else if (Date.Month < DateTime.Now.Month ||
                      (Date.Month == DateTime.Now.Month && Date.Day <= DateTime.Now.Day))
             {
-                _horoscope.Age = DateTime.Now.Year - _horoscope.Date.Year;
+                Age = (DateTime.Now.Year - Date.Year).ToString();
 
             }
 
@@ -165,48 +131,47 @@ public ICommand CalculateCommand
 
         private void CalculateChineseSign()
         {
-            switch (( _horoscope.Date.Year - 4) % 12)
+            switch (( Date.Year - 4) % 12)
             {
                 case 0:
-                    _horoscope.ChAstrology = _chineseSigns[0];
+                    ChAstrology = _chineseSigns[0];
                     break;
                 case 1:
-                    _horoscope.ChAstrology = _chineseSigns[1];
+                    ChAstrology = _chineseSigns[1];
                     break;
                 case 2:
-                    _horoscope.ChAstrology = _chineseSigns[2];
+                    ChAstrology = _chineseSigns[2];
                     break;
                 case 3:
-                    _horoscope.ChAstrology = _chineseSigns[3];
+                    ChAstrology = _chineseSigns[3];
                     break;
                 case 4:
-                    _horoscope.ChAstrology = _chineseSigns[4];
+                    ChAstrology = _chineseSigns[4];
                     break;
                 case 5:
-                    _horoscope.ChAstrology = _chineseSigns[5];
+                    ChAstrology = _chineseSigns[5];
                     break;
                 case 6:
-                    _horoscope.ChAstrology = _chineseSigns[6];
+                    ChAstrology = _chineseSigns[6];
                     break;
                 case 7:
-                    _horoscope.ChAstrology = _chineseSigns[7];
+                    ChAstrology = _chineseSigns[7];
                     break;
                 case 8:
-                    _horoscope.ChAstrology = _chineseSigns[8];
+                    ChAstrology = _chineseSigns[8];
                     break;
                 case 9:
-                    _horoscope.ChAstrology = _chineseSigns[9];
+                    ChAstrology = _chineseSigns[9];
                     break;
                 case 10:
-                    _horoscope.ChAstrology = _chineseSigns[10];
+                    ChAstrology = _chineseSigns[10];
                     break;
                 case 11:
-                    _horoscope.ChAstrology = _chineseSigns[11];
+                    ChAstrology = _chineseSigns[11];
                     break;
                 case 12:
-                    _horoscope.ChAstrology = _chineseSigns[12];
+                    ChAstrology = _chineseSigns[12];
                     break;
-
             }
         }
 
@@ -218,7 +183,8 @@ public ICommand CalculateCommand
                 CalculateAge();
                 CalculateWestSign();
                 CalculateChineseSign();
-                OnPropertyChanged(nameof(_horoscope.Age));
+                OnPropertyChanged(nameof(Date));
+                OnPropertyChanged(nameof(Age));
                 OnPropertyChanged(nameof(WAstrology));
                 OnPropertyChanged(nameof(ChAstrology));
                 OnPropertyChanged();

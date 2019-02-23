@@ -24,7 +24,7 @@
         <Label Name="AskBd" Grid.Row="0" VerticalAlignment="Center"  Content="Enter your birthday date: " ></Label>
         <DatePicker Name="DatePicker" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" DisplayDate="{x:Static sys:DateTime.Now}"  SelectedDate="{Binding Date , UpdateSourceTrigger=PropertyChanged, Delay=5}"></DatePicker>
         <Label Name="Age" Grid.Row="1" Grid.Column="0"  VerticalAlignment="Center"  Content="Your age is: " ></Label>
-        <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Age, Mode=OneWay}"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Age, Mode=OneWay}"> </TextBlock>
         <Label Name="WesternAstrology" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" Content="Western Astrology: " ></Label>
         <Label Name="ChineseAstrology" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" Content="Chinese Astrology: " ></Label>
         <TextBlock Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding WAstrology, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"></TextBlock>
