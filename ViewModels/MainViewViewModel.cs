@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using KMA.ProgrammingInCSharp.Lab1.Annotations;
 using KMA.ProgrammingInCSharp.Lab1.Managers;
+using KMA.ProgrammingInCSharp.Lab1.Models;
 using KMA.ProgrammingInCSharp.Lab1.Tools;
 
 namespace KMA.ProgrammingInCSharp.Lab1.ViewModels
@@ -14,7 +15,7 @@ namespace KMA.ProgrammingInCSharp.Lab1.ViewModels
     {
         #region Fields
 
-        private DateTime _dateTime = DateTime.Now;
+        private Horoscope _horoscope;
 
         private readonly string[] _westSigns = { "Capricorn", "Aquarius", "Pisces", "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo", "Libra", "Scorpio", "Sagittarius" };
         private readonly string[] _chineseSigns = { "Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Goat", "Monkey", "Rooster", "Dog", "Pig" };
@@ -27,18 +28,44 @@ namespace KMA.ProgrammingInCSharp.Lab1.ViewModels
 
         #region Properties
 
-        public DateTime Date {
-            get { return _dateTime; }
-
-            set { _dateTime = value; }
-
+        public Horoscope Horoscope
+        {
+            get { return _horoscope; }
+            set
+            {
+                _horoscope = value;
+                OnPropertyChanged();
+            }
         }
 
-        public string Age { get; set; }
+        public DateTime Date {
+            get { return _horoscope.Date; }
 
-        public string WAstrology { get; set; }
+            set { _horoscope.Date = value; }
+        }
 
-        public string ChAstrology { get; set; }
+        
+
+        public string Age
+        {
+            get
+            {
+                return _horoscope.Age;
+            }
+            set { _horoscope.Age = value; }
+        }
+
+        public string WAstrology
+        {
+            get { return _horoscope.WSign; }
+            set { _horoscope.WSign = value; }
+        }
+
+        public string ChAstrology
+        {
+            get { return _horoscope.ESign;}
+            set { _horoscope.ESign = value; }
+        }
 
 
         #region Commands
@@ -52,6 +79,11 @@ namespace KMA.ProgrammingInCSharp.Lab1.ViewModels
         #endregion
 
         #endregion
+
+        public MainViewViewModel()
+        {
+            _horoscope = new Horoscope();
+        }
 
 
         private void CalculateAge()
